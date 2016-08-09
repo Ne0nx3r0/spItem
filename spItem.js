@@ -1,6 +1,6 @@
 "use strict";
 
-const Immutable = require('./immutable.js');
+const Immutable = require('./lib/immutable.js');
 
 const spBase = function(o) {
 	let fieldMap = {};
