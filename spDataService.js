@@ -14,7 +14,7 @@ class spDataService{
 			listName: spModel.getListName(),
 			webURL: spModel.getSiteUrl(),
 			batchCmd: 'New',
-			debug:true,// <- Show us the errorsvaluepairs: this._getValuePairs(spModel),
+			debug: true,// <- Show us the errorsvaluepairs: this._getValuePairs(spModel),
 			completefunc: function(xData,status){
 				let $xml = $(xData.responseXML);
 				let errorCode = $xml.find('ErrorCode').text();
