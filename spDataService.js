@@ -21,10 +21,11 @@ class spDataService{
 
 				if(errorCode == '0x00000000'){
 					d.resolve({
-						// Because the schema and potentially necessary fields aren't
-						// handed back with this call we force 
-						// the caller to make their own call if they want more data
-						modelId: $xml.find('z\\:row').attr('ows_ID')
+						// Because the schema and potentially necessary fields 
+                        // aren't handed back with this call 
+						// the caller will need to make 
+                        // their own call if they want more data
+                        modelId: $xml.find('z\\:row').attr('ows_ID')
 					});
 				}
 				else{
