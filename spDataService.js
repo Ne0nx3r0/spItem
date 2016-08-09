@@ -25,7 +25,7 @@ class spDataService{
                         // aren't handed back with this call 
 						// the caller will need to make 
                         // their own call if they want more data
-                        modelId: $xml.find('z\\:row').attr('ows_ID')
+                        id: $xml.find('z\\:row').attr('ows_ID')
 					});
 				}
 				else{
