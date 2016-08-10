@@ -21,18 +21,10 @@ const spBase = function(o) {
 
 	class _spBase extends Immutable.Record(fieldMap){
 		getSiteUrl(){
-			// Warn if the class doesn't properly implement site url
-			if(!this._siteUrl){
-				console.error(this.constructor.name+' does not implement siteUrl');
-			}
 			return this._siteUrl;
 		}
 
 		getListName(){
-			// Warn if the class doesn't properly implement list name
-			if(!this._listName){
-				console.error(this.constructor.name+' does not implement listName');
-			}
 			return this._listName;
 		}
 	}
@@ -60,9 +52,10 @@ class spItem extends spBase({
 	siteUrl: undefined,
 	listName: undefined
 }){
+/*	Method example:
 	getId(){
 		return this.get('ID');
-	}
+	}*/
 }
 
 class spDocument extends spBase({

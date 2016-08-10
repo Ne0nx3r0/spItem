@@ -61,7 +61,7 @@ const toEqual = (expected)=>{
 
 //chained from expect
 const toBeDefined = (expected)=>{
-    if(this.actual != undefined){
+    if(this.actual == undefined){
         throw new Fail('<defined>',this.actual);
     };
 }
@@ -86,7 +86,7 @@ const it = (testTitle,testFunc)=>{
     }
     catch(ex){
         if(ex instanceof Fail){
-            _fail = '   '+testTitle+': FAILED - Expected: '+ex.expected+' Actual: '+ex.actual;
+            _fail = '    '+testTitle+': FAILED - Expected: '+ex.expected+' Actual: '+ex.actual;
         }
         else{
             throw ex;
@@ -103,7 +103,7 @@ const it = (testTitle,testFunc)=>{
 }
 
 const describe = (suiteTitle,suiteFunc)=>{
-    console.log(suiteTitle);
+    console.log('\n'+suiteTitle);
 
     let _fail;
 

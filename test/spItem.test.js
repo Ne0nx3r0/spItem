@@ -20,8 +20,8 @@ describe('spBase',()=>{
                 'Body': undefined,
                 'Teaser': undefined
             },
-            siteUrl: undefined,
-            listName: undefined
+            siteUrl: 'http://localhost/siteUrl/',
+            listName: 'Announcements'
         }){
             getTeaser(){
                 let teaser = this.get('Teaser');
@@ -35,46 +35,72 @@ describe('spBase',()=>{
             }
         }//extends spBase
 
-        let announcement = new spAnnouncement();
+        expect(spAnnouncement).toBeDefined();
+    });
 
-        expect(announcement.get('Title')).toBe('Untitled');
-        expect(announcement.get('ID')).toBe(undefined);
+    it('should allow subclass instances',()=>{
+        let announcement = new spAnnouncement({ID:42});
+
+        //overwritten by spAnnouncement
+        expect(announcement.get('Title')).toEqual('Untitled');
+
+        //from spItem
+        expect(announcement.get('ID')).toEqual(42);
     });//it
 
-    
+    it('should provide list info from instances',()=>{
+        let announcement = new spAnnouncement();
+
+        expect(announcement.getSiteUrl()).toEqual('http://localhost/siteUrl/');
+        expect(announcement.getListName()).toEqual('Announcements');
+    });//it
+
+    it('should allow subclasses to overwrite parent list info',()=>{
+        class spOverwritten extends spBase({
+            parent: spAnnouncement,
+            siteUrl: 'http://localhost/mySiteUrl/',
+            listName: undefined
+        }){}
+
+        let announcement = new spOverwritten();
+
+        expect(announcement.getSiteUrl()).toEqual('http://localhost/mySiteUrl/');
+        expect(announcement.getListName()).toEqual(undefined);
+    });//it
+
+    it('should allow subclasses to overwrite site info',()=>{
+        class spOverwritten extends spBase({
+            parent: spAnnouncement
+        }){}
+
+        let announcement = new spOverwritten();
+
+        expect(announcement.get('Title')).toEqual('Untitled');
+    });//it
 });//describe
 
-/*
-new Testy().describe('spItem',()=>{
-    const spAnnouncement; 
+const spDocument = spi.spDocument;
 
-    
+describe('spDocument',()=>{
+    it('should instantiate',()=>{
+        expect(new spDocument()).toBeDefined();
+    });//it
 
+    it('should allow getting the filename',()=>{
+        const document = new spDocument({
+            FileLeafRef: 'filler;#someFile.txt'
+        });
 
+        expect(document.getFileName()).toEqual('someFile.txt');
+    });//it
 
-}).done();
+    it('should allow getting the file url',()=>{
+        const document = new spDocument({
+            FileRef: {
+                lookupValue:'someSite/someFile.txt'
+            }
+        });
 
-let announcement = new spi.spItem({
-    ID: 42,
-    Body:'Test body'
-});
-
-testy.assert(
-    'field property set',
-    testItem1.get('ID'),
-    42
-);
-
-testy.assert(
-    'removing property sets to undefined',
-    testItem1.remove('ID').get('ID'),
-    undefined
-);
-
-testy.assert(
-    'After removing property original untouched',
-    testItem1.get('ID'),
-    42
-);
-
-testy.done();*/
+        expect(document.getFileUrl()).toEqual('/someSite/someFile.txt');
+    });//it
+});//describe
