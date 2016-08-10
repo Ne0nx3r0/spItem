@@ -1,27 +1,63 @@
 "use strict";
 
 const spi = require('../spItem.js');
+const spItem = spi.spItem;
+const spBase = spi.spBase;
+
 const Testy = require('./testy.js');
+const describe = Testy.describe;
+const it = Testy.it;
+const expect = Testy.expect;
 
-class spAnnouncement extends spi.spBase({
-	parent: spItem,
-	fields:{
-        'Title': 'Untitled',
-		'Body': undefined,
-        'Teaser': undefined
-	},
-	siteUrl: undefined,
-	listName: undefined
-}){
+describe('spBase',()=>{
+    let spAnnouncement;
 
-}
+    it('should be extensible',()=>{
+        spAnnouncement = class _spAnnouncement extends spBase({
+            parent: spItem,
+            fields:{
+                'Title': 'Untitled',
+                'Body': undefined,
+                'Teaser': undefined
+            },
+            siteUrl: undefined,
+            listName: undefined
+        }){
+            getTeaser(){
+                let teaser = this.get('Teaser');
 
-let testItem1 = new spi.spItem({
+                if(teaser){
+                    return teaser;
+                }
+                else{
+                    return this.get('Body').substr(0,100)+'...';
+                }
+            }
+        }//extends spBase
+
+        let announcement = new spAnnouncement();
+
+        expect(announcement.get('Title')).toBe('Untitled');
+        expect(announcement.get('ID')).toBe(undefined);
+    });//it
+
+    
+});//describe
+
+/*
+new Testy().describe('spItem',()=>{
+    const spAnnouncement; 
+
+    
+
+
+
+}).done();
+
+let announcement = new spi.spItem({
     ID: 42,
-    Title: 'Test Item'
+    Body:'Test body'
 });
-
-let testy = new Testy();
 
 testy.assert(
     'field property set',
@@ -41,4 +77,4 @@ testy.assert(
     42
 );
 
-testy.done();
+testy.done();*/
