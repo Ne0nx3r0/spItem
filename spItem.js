@@ -5,8 +5,8 @@ const Immutable = require('./lib/immutable.js');
 const spBase = function(o) {
 	let fieldMap = {};
 
-	if(o.parentClass){
-		let temp = new o.parentClass();
+	if(o.parent){
+		let temp = new o.parent();
 		
 		if(temp._fieldMap){
 			fieldMap = temp._fieldMap;
@@ -47,7 +47,7 @@ const spBase = function(o) {
 }
 
 class spItem extends spBase({
-	parentClass: undefined,
+	parent: undefined,
 	fields:{
 		'ID': undefined,
 		'Title': undefined,
@@ -66,7 +66,7 @@ class spItem extends spBase({
 }
 
 class spDocument extends spBase({
-	parentClass: spItem,
+	parent: spItem,
 	fields:{
 		'FileLeafRef':undefined,
 		'FileRef':undefined,

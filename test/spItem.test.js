@@ -3,6 +3,19 @@
 const spi = require('../spItem.js');
 const Testy = require('./testy.js');
 
+class spAnnouncement extends spi.spBase({
+	parent: spItem,
+	fields:{
+        'Title': 'Untitled',
+		'Body': undefined,
+        'Teaser': undefined
+	},
+	siteUrl: undefined,
+	listName: undefined
+}){
+
+}
+
 let testItem1 = new spi.spItem({
     ID: 42,
     Title: 'Test Item'
