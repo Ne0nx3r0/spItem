@@ -67,16 +67,6 @@ describe('spBase',()=>{
         expect(announcement.getSiteUrl()).toEqual('http://localhost/mySiteUrl/');
         expect(announcement.getListName()).toEqual(undefined);
     });//it
-
-    it('should allow subclasses to overwrite site info',()=>{
-        class spOverwritten extends spBase({
-            parent: spAnnouncement
-        }){}
-
-        let announcement = new spOverwritten();
-
-        expect(announcement.get('Title')).toEqual('Untitled');
-    });//it
 });//describe
 
 const spDocument = spi.spDocument;
