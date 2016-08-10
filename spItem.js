@@ -92,3 +92,7 @@ class spDocument extends spBase({
 		}
 	}
 }
+
+module.exports.spBase = spBase;
+module.exports.spItem = spItem;
+module.exports.spDocument = spDocument;
